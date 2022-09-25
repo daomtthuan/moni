@@ -33,6 +33,8 @@ export enum LogLevel {
  *
  * @param [configs={}] Logger configs. Default is `{}`
  * @param [dependencies=[]] The dependencies. Default is `[]`
+ *
+ * @returns The logger status. If `true`, the logger is ready to use. Otherwise `false`, the logger is not ready.
  */
 export const useLogger = function (configs: LoggerConfigs = {}, dependencies: DependencyList = []) {
   const [status, setStatus] = useState(false);

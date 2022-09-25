@@ -1,9 +1,9 @@
-package com.moni.newarchitecture.modules;
+package com.daomtthuan.moni.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactPackageTurboModuleManagerDelegate;
-import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 
@@ -15,13 +15,11 @@ import java.util.List;
  * <p>Please note that this class is used ONLY if you opt-in for the New Architecture (see the
  * `newArchEnabled` property). Is ignored otherwise.
  */
-public class MainApplicationTurboModuleManagerDelegate
-    extends ReactPackageTurboModuleManagerDelegate {
+public class MainApplicationTurboModuleManagerDelegate extends ReactPackageTurboModuleManagerDelegate {
 
   private static volatile boolean sIsSoLibraryLoaded;
 
-  protected MainApplicationTurboModuleManagerDelegate(
-      ReactApplicationContext reactApplicationContext, List<ReactPackage> packages) {
+  protected MainApplicationTurboModuleManagerDelegate(ReactApplicationContext reactApplicationContext, List<ReactPackage> packages) {
     super(reactApplicationContext, packages);
   }
 
@@ -30,8 +28,7 @@ public class MainApplicationTurboModuleManagerDelegate
   native boolean canCreateTurboModule(String moduleName);
 
   public static class Builder extends ReactPackageTurboModuleManagerDelegate.Builder {
-    protected MainApplicationTurboModuleManagerDelegate build(
-        ReactApplicationContext context, List<ReactPackage> packages) {
+    protected MainApplicationTurboModuleManagerDelegate build(ReactApplicationContext context, List<ReactPackage> packages) {
       return new MainApplicationTurboModuleManagerDelegate(context, packages);
     }
   }

@@ -1,5 +1,6 @@
 import { Text, VStack } from 'native-base';
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent, PropsWithoutRef, useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 
 import { loggerConfigs } from '../configs/logger';
 import { useLogger } from '../hooks/logger';
@@ -24,7 +25,13 @@ export type AppRootComponent = FunctionComponent<AppRootProps>;
 // --------------------------------------------------------------------------------
 
 export const AppRoot: AppRootComponent = function () {
-  useLogger(loggerConfigs);
+  const loggerStatus = useLogger(loggerConfigs);
+
+  useEffect(() => {
+    if (loggerStatus) {
+      SplashScreen.hide();
+    }
+  }, [loggerStatus]);
 
   return (
     <ThemeProvider>

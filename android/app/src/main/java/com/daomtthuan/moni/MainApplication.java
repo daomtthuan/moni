@@ -2,17 +2,18 @@ package com.daomtthuan.moni;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.daomtthuan.moni.newarchitecture.MainApplicationReactNativeHost;
-import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -24,15 +25,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      // @SuppressWarnings("UnnecessaryLocalVariable")
-      // List<ReactPackage> packages = new PackageList(this).getPackages();
+      @SuppressWarnings("UnnecessaryLocalVariable")
+      List<ReactPackage> packages = new PackageList(this).getPackages();
 
-      // return packages;
-      
-      return Arrays.<ReactPackage>asList(
-        new MainReactPackage(),
-        new SplashScreenReactPackage()
-      );
+      return packages;
     }
 
     @Override
@@ -55,37 +51,30 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    // If you opted-in for the New Architecture, we enable the TurboModule system
+    // Enable the TurboModule system.
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exo-package */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
   /**
-   * Loads Flipper in React Native templates. Call this in the onCreate method with something like
-   * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+   * Loads Flipper in React Native templates. 
+   * Call this in the onCreate method with something like:
    *
-   * @param context
-   * @param reactInstanceManager
+   * <pre><code>initializeFlipper(this, getReactNativeHost().getReactInstanceManager());</code></pre>
+   *
+   * @param context Context.
+   * @param reactInstanceManager React instance manager.
    */
   private static void initializeFlipper(Context context, ReactInstanceManager reactInstanceManager) {
     if (BuildConfig.DEBUG) {
       try {
-        /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
+        // Using reflection here to pick up the class that initializes Flipper, since Flipper library is not available in release mode.
         Class<?> aClass = Class.forName("com.daomtthuan.moni.ReactNativeFlipper");
         aClass
           .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
           .invoke(null, context, reactInstanceManager);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
-      } catch (InvocationTargetException e) {
+      } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
         e.printStackTrace();
       }
     }

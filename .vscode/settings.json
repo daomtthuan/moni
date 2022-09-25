@@ -1,0 +1,30 @@
+{
+  "cSpell.words": ["Daomtthuan", "endregion", "moni", "Nativebase", "tsdoc"],
+  "material-icon-theme.activeIconPack": "react_redux",
+  "material-icon-theme.opacity": 0.8,
+  "material-icon-theme.saturation": 0.9,
+  "material-icon-theme.files.associations": {
+    // React Native
+    "config": "settings",
+    "settings.json": "vscode",
+    "_node-version": "nodejs",
+    "_ruby-version": "ruby",
+    "metro.config.js": "robot",
+    "app.json": "settings",
+
+    // Component
+    "_styles.ts": "react",
+    "_hooks.ts": "svgr",
+    "_configs.ts": "settings",
+    "_types.ts": "typescript-def",
+
+    // Redux
+    "*.slice.ts": "redux-action",
+    "*.state.ts": "redux-reducer"
+  },
+  "material-icon-theme.folders.associations": {
+    // React Native
+    "_bundle": "packages",
+    ".react": "react-components"
+  }
+}

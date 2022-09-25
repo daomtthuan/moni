@@ -1,21 +1,15 @@
-import { useColorMode } from 'native-base';
-import { FunctionComponent, PropsWithoutRef, useEffect } from 'react';
-import SplashScreen from 'react-native-splash-screen';
-
-import { Content } from '../components/Content';
-import { loggerConfigs } from '../configs/logger';
-import { useLogger } from '../hooks/logger';
-import { ThemeProvider } from './ThemeProvider';
+import { Button, Text, useColorMode, VStack } from 'native-base';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 
 // --------------------------------------------------------------------------------
 // #region Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** AppRoot props. */
-export type AppRootProps = PropsWithoutRef<{}>;
+export type ContentProps = PropsWithoutRef<{}>;
 
 /** AppRoot component. */
-export type AppRootComponent = FunctionComponent<AppRootProps>;
+export type ContentComponent = FunctionComponent<ContentProps>;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -25,21 +19,14 @@ export type AppRootComponent = FunctionComponent<AppRootProps>;
 // #region Component
 // --------------------------------------------------------------------------------
 
-export const AppRoot: AppRootComponent = function () {
-  const loggerStatus = useLogger(loggerConfigs);
-
+export const Content: ContentComponent = function () {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  useEffect(() => {
-    if (loggerStatus) {
-      SplashScreen.hide();
-    }
-  }, [loggerStatus]);
-
   return (
-    <ThemeProvider>
-      <Content />
-    </ThemeProvider>
+    <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
+      <Text>Theme Mode: {colorMode}</Text>
+      <Button onPress={() => toggleColorMode()}>Toggle Theme</Button>
+    </VStack>
   );
 };
 

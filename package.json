@@ -6,9 +6,10 @@
   "author": "Daomtthuan <dao.mtt.huan@gmail.com> (https://github.com/daomtthuan)",
   "main": "index.js",
   "scripts": {
-    "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android",
+    "adb": "adb reverse tcp:8081 tcp:8081",
+    "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "emulator": "emulator -avd Pixel_4"
   },
   "dependencies": {

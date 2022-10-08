@@ -237,7 +237,6 @@ gradle-app.setting
 # Icon must end with two \r
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -420,7 +419,6 @@ $RECYCLE.BIN/
 *.lnk
 
 ### Xcode ###
-
 
 ### Xcode Patch ###
 *.xcodeproj/*

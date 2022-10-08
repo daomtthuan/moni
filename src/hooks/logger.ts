@@ -2,30 +2,15 @@ import { DependencyList, useCallback, useEffect, useState } from 'react';
 import { ConfigureOptions, FileLogger } from 'react-native-file-logger';
 
 // --------------------------------------------------------------------------------
-// #region Types and Interfaces
+// #region - Types and Interfaces
 // --------------------------------------------------------------------------------
-//
-/** Logger configs. */
-export type LoggerConfigs = ConfigureOptions;
-
-/** Logger level. */
-export enum LogLevel {
-  /** Debug level. */
-  Debug,
-  /** Info level. */
-  Info,
-  /** Warn level. */
-  Warning,
-  /** Error level. */
-  Error,
-}
 
 // --------------------------------------------------------------------------------
 // #endregion
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region Hooks
+// #region - Hooks
 // --------------------------------------------------------------------------------
 
 /**
@@ -36,7 +21,7 @@ export enum LogLevel {
  *
  * @returns The logger status. If `true`, the logger is ready to use. Otherwise `false`, the logger is not ready.
  */
-export const useLogger = function (configs: LoggerConfigs = {}, dependencies: DependencyList = []) {
+export const useLogger = function (configs: ConfigureOptions = {}, dependencies: DependencyList = []) {
   const [status, setStatus] = useState(false);
 
   const configureLogger = useCallback(async () => {

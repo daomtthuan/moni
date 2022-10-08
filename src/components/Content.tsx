@@ -2,7 +2,7 @@ import { Button, Text, useColorMode, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
 
 // --------------------------------------------------------------------------------
-// #region Types and Interfaces
+// #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** AppRoot props. */
@@ -16,7 +16,7 @@ export type ContentComponent = FunctionComponent<ContentProps>;
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region Component
+// #region - Component
 // --------------------------------------------------------------------------------
 
 export const Content: ContentComponent = function () {

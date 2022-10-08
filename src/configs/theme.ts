@@ -1,13 +1,13 @@
-import { theme } from 'native-base';
+import { INativebaseConfig, theme } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { ThemeConfigs, ThemeMode, ThemeVariables } from '../hooks/theme';
+import { ThemeColorMode, ThemeVariables } from '../hooks/theme';
 
 /** Default theme mode. */
-export const defaultThemeMode: ThemeMode = ThemeMode.Light;
+export const defaultThemeMode: ThemeColorMode = 'light';
 
 /** Theme Configs. */
-export const themeConfigs: ThemeConfigs = {
+export const themeConfigs: INativebaseConfig = {
   dependencies: {
     'linear-gradient': LinearGradient,
   },
@@ -47,7 +47,7 @@ export const themeVariables: ThemeVariables = {
     },
   },
   config: {
-    initialColorMode: ThemeMode.Light,
+    initialColorMode: defaultThemeMode,
   },
 
   components: {

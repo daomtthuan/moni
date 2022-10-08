@@ -5,7 +5,7 @@ import { defaultThemeMode, themeConfigs, themeVariables } from '../configs/theme
 import { useThemeConfigurer, useThemeModeManager, useThemeVariables } from '../hooks/theme';
 
 // --------------------------------------------------------------------------------
-// #region Types and Interfaces
+// #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** ThemeProvider props. */
@@ -19,7 +19,7 @@ export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region Component
+// #region - Component
 // --------------------------------------------------------------------------------
 
 /**

@@ -1,4 +1,3 @@
-import { useColorMode } from 'native-base';
 import { FunctionComponent, PropsWithoutRef, useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 
@@ -8,7 +7,7 @@ import { useLogger } from '../hooks/logger';
 import { ThemeProvider } from './ThemeProvider';
 
 // --------------------------------------------------------------------------------
-// #region Types and Interfaces
+// #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** AppRoot props. */
@@ -22,13 +21,11 @@ export type AppRootComponent = FunctionComponent<AppRootProps>;
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region Component
+// #region - Component
 // --------------------------------------------------------------------------------
 
 export const AppRoot: AppRootComponent = function () {
   const loggerStatus = useLogger(loggerConfigs);
-
-  const { colorMode, toggleColorMode } = useColorMode();
 
   useEffect(() => {
     if (loggerStatus) {

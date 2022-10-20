@@ -15,5 +15,5 @@
     "strict": true,
     "types": ["node", "react", "react-native"]
   },
-  "include": ["./index.ts", "./src/**/*"]
+  "include": ["./src/**/*", "index.js", "index.js"]
 }

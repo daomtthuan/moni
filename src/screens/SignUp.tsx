@@ -1,20 +1,15 @@
-import { FunctionComponent, PropsWithoutRef, useEffect } from 'react';
-import SplashScreen from 'react-native-splash-screen';
-
-import { Content } from '../components/Content';
-import { loggerConfigs } from '../configs/logger';
-import { useLogger } from '../hooks/logger';
-import { ThemeProvider } from './ThemeProvider';
+import { Text, VStack } from 'native-base';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** AppRoot props. */
-export type AppRootProps = PropsWithoutRef<{}>;
+/** SignUpScreen props. */
+export type SignUpScreenProps = PropsWithoutRef<{}>;
 
-/** AppRoot component. */
-export type AppRootComponent = FunctionComponent<AppRootProps>;
+/** SignUpScreen component. */
+export type SignUpScreenComponent = FunctionComponent<SignUpScreenProps>;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -24,19 +19,16 @@ export type AppRootComponent = FunctionComponent<AppRootProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-export const AppRoot: AppRootComponent = function () {
-  const loggerStatus = useLogger(loggerConfigs);
-
-  useEffect(() => {
-    if (loggerStatus) {
-      SplashScreen.hide();
-    }
-  }, [loggerStatus]);
-
+/**
+ * SignUpScreen component.
+ *
+ * @returns The Sign up screen component.
+ */
+export const SignUpScreen: SignUpScreenComponent = function () {
   return (
-    <ThemeProvider>
-      <Content />
-    </ThemeProvider>
+    <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
+      <Text>Sign up screen</Text>
+    </VStack>
   );
 };
 

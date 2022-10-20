@@ -1,15 +1,15 @@
-import { Button, Text, useColorMode, VStack } from 'native-base';
+import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** AppRoot props. */
-export type ContentProps = PropsWithoutRef<{}>;
+/** UserInfoScreen props. */
+export type UserInfoScreenProps = PropsWithoutRef<{}>;
 
-/** AppRoot component. */
-export type ContentComponent = FunctionComponent<ContentProps>;
+/** UserInfoScreen component. */
+export type UserInfoScreenComponent = FunctionComponent<UserInfoScreenProps>;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -19,13 +19,15 @@ export type ContentComponent = FunctionComponent<ContentProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-export const Content: ContentComponent = function () {
-  const { colorMode, toggleColorMode } = useColorMode();
-
+/**
+ * UserInfoScreen component.
+ *
+ * @returns The User information screen component.
+ */
+export const UserInfoScreen: UserInfoScreenComponent = function () {
   return (
     <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
-      <Text>Theme Mode: {colorMode}</Text>
-      <Button onPress={() => toggleColorMode()}>Toggle Theme</Button>
+      <Text>User info screen</Text>
     </VStack>
   );
 };

@@ -1,15 +1,19 @@
 import { NativeBaseProvider } from 'native-base';
 import { FunctionComponent, PropsWithChildren, PropsWithoutRef } from 'react';
 
-import { defaultThemeMode, themeConfigs, themeVariables } from '../configs/theme';
-import { useThemeConfigurer, useThemeModeManager, useThemeVariables } from '../hooks/theme';
+import { ThemeConfigurer } from '../hooks/theme';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** ThemeProvider props. */
-export type ThemeProviderProps = PropsWithoutRef<PropsWithChildren<{}>>;
+export type ThemeProviderProps = PropsWithoutRef<
+  PropsWithChildren<{
+    /** Theme configurer. */
+    configurer: ThemeConfigurer;
+  }>
+>;
 
 /** ThemeProvider component. */
 export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;
@@ -25,17 +29,13 @@ export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;
 /**
  * ThemeProvider component.
  *
- * @param [props] ThemeProvider props.
+ * @param props Theme provider props.
  *
- * @returns ThemeProvider component JSX.
+ * @returns The Theme provider container component.
  */
 export const ThemeProvider: ThemeProviderComponent = function (props) {
-  const configs = useThemeConfigurer(themeConfigs);
-  const variables = useThemeVariables(themeVariables);
-  const themeModeManager = useThemeModeManager(defaultThemeMode);
-
   return (
-    <NativeBaseProvider config={configs} theme={variables} colorModeManager={themeModeManager} isSSR>
+    <NativeBaseProvider config={props.configurer.configs} theme={props.configurer.variables} colorModeManager={props.configurer.modeManager} isSSR>
       {props.children}
     </NativeBaseProvider>
   );

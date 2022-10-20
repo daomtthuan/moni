@@ -15,7 +15,7 @@ module.exports = {
   // JSDoc options
   jsdocDescriptionWithDot: true,
   jsdocSeparateReturnsFromParam: true,
-  jsdocSeparateTagGroups: true,
+  jsdocSeparateTagGroups: false,
   jsdocPreferCodeFences: true,
   tsdoc: true,
 };

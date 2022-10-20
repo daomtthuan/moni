@@ -1,9 +1,9 @@
 import { ColorMode, extendTheme, INativebaseConfig, StorageManager, Theme } from 'native-base';
-import { DependencyList, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
-import { AsyncStorageKey } from '../configs/async-storage';
+import { ThemeAsyncStorageKey } from '../configs/async-storage';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
@@ -15,6 +15,16 @@ export type ThemeColorMode = NonNullable<ColorMode>;
 /** ThemeProvider variables. */
 export type ThemeVariables = Theme | (Record<string, any> & {});
 
+/** Theme configurer. */
+export type ThemeConfigurer = {
+  /** Theme Configs. */
+  configs: INativebaseConfig;
+  /** Theme color mode manager. */
+  modeManager: StorageManager;
+  /** Theme variables. */
+  variables: Theme;
+};
+
 // --------------------------------------------------------------------------------
 // #endregion
 // --------------------------------------------------------------------------------
@@ -24,80 +34,60 @@ export type ThemeVariables = Theme | (Record<string, any> & {});
 // --------------------------------------------------------------------------------
 
 /**
- * Create a storage manager for the theme mode.
+ * Create a theme configurer.
  *
- * @param [defaultMode=ThemeMode.Light] The default theme mode. Default is `ThemeMode.Light`
- * @param [dependencies=[]] The dependencies. Default is `[]`
+ * @param themeConfigs Theme configs.
+ * @param defaultThemeMode Default theme color mode.
+ * @param themeVariables Theme variables.
  *
- * @returns Theme mode storage manager.
+ * @returns The theme configurer.
  */
-export const useThemeModeManager = function (defaultMode: ThemeColorMode = 'light', dependencies: DependencyList = []): StorageManager {
-  const { getItem, setItem } = useAsyncStorage(AsyncStorageKey.ThemeMode);
+export const useThemeConfigurer = function (themeConfigs: INativebaseConfig, defaultThemeMode: ThemeColorMode, themeVariables: ThemeVariables) {
+  const modeStorage = useAsyncStorage(ThemeAsyncStorageKey.Mode);
 
-  const storageManager = useMemo<StorageManager>(
-    () => ({
+  const modeManager = useMemo<StorageManager>(() => {
+    return {
       /**
        * Get the theme mode from the async storage.
        *
        * @returns The theme color mode.
        */
-      get: async (): Promise<ThemeColorMode> => {
+      get: async () => {
         try {
-          let mode = (await getItem()) ?? defaultMode;
+          let mode = (await modeStorage.getItem()) ?? defaultThemeMode;
 
           return mode as ThemeColorMode;
         } catch (error) {
           console.error("Couldn't get the theme mode from the async storage.", error);
 
-          return defaultMode;
+          return defaultThemeMode;
         }
       },
 
       /**
        * Set the theme mode to the async storage.
        *
-       * @param [mode=defaultMode] The theme mode. Default is `defaultMode`
+       * @param mode The theme mode.
        */
-      set: async (mode: ThemeColorMode = defaultMode) => {
+      set: async (mode) => {
         try {
-          await setItem(mode);
+          await modeStorage.setItem(mode as ThemeColorMode);
         } catch (error) {
           console.error("Couldn't set the theme mode to the async storage.", error);
         }
       },
-    }),
-    dependencies,
-  );
+    };
+  }, [modeStorage, defaultThemeMode]);
 
-  return storageManager;
-};
+  const themeConfigurer = useMemo<ThemeConfigurer>(() => {
+    return {
+      configs: themeConfigs,
+      modeManager: modeManager,
+      variables: extendTheme(themeVariables),
+    };
+  }, [themeConfigs, modeManager, themeVariables]);
 
-/**
- * Create theme Configurer.
- *
- * @param [configs={}] The theme configs. Default is `{}`
- * @param [dependencies=[]] The dependencies. Default is `[]`
- *
- * @returns Theme Configurer.
- */
-export const useThemeConfigurer = function (configs: INativebaseConfig = {}, dependencies: DependencyList = []): INativebaseConfig {
-  const themeConfigurator = useMemo<INativebaseConfig>(() => configs, dependencies);
-
-  return themeConfigurator;
-};
-
-/**
- * Create theme variables.
- *
- * @param [variables={}] The theme variables. Default is `{}`
- * @param [dependencies=[]] The dependencies. Default is `[]`
- *
- * @returns Theme provider.
- */
-export const useThemeVariables = function (variables: ThemeVariables = {}, dependencies: DependencyList = []): Theme {
-  const themeProvider = useMemo<Theme>(() => extendTheme(variables), dependencies);
-
-  return themeProvider;
+  return themeConfigurer;
 };
 
 // --------------------------------------------------------------------------------

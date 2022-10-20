@@ -3,6 +3,10 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { ThemeColorMode, ThemeVariables } from '../hooks/theme';
 
+// --------------------------------------------------------------------------------
+// #region - Configs
+// --------------------------------------------------------------------------------
+
 /** Default theme mode. */
 export const defaultThemeMode: ThemeColorMode = 'light';
 
@@ -52,7 +56,7 @@ export const themeVariables: ThemeVariables = {
 
   components: {
     Text: {
-      baseStyle: (props: any) => {
+      baseStyle: () => {
         return {
           _light: { color: 'dark.900' },
           _dark: { color: 'light.900' },
@@ -60,7 +64,7 @@ export const themeVariables: ThemeVariables = {
       },
     },
     VStack: {
-      baseStyle: (props: any) => {
+      baseStyle: () => {
         return {
           _light: { bgColor: 'light.900' },
           _dark: { bgColor: 'dark.900' },
@@ -69,3 +73,7 @@ export const themeVariables: ThemeVariables = {
     },
   },
 };
+
+// --------------------------------------------------------------------------------
+// #endregion
+// --------------------------------------------------------------------------------

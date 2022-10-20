@@ -1,9 +1,19 @@
-import { DependencyList, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ConfigureOptions, FileLogger } from 'react-native-file-logger';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
+
+/** Logger status. */
+export enum LoggerStatus {
+  /** Ready. */
+  Ready,
+  /** Ready. */
+  NotReady,
+  /** Failed. */
+  Failed,
+}
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -16,34 +26,32 @@ import { ConfigureOptions, FileLogger } from 'react-native-file-logger';
 /**
  * Create a logger.
  *
- * @param [configs={}] Logger configs. Default is `{}`
- * @param [dependencies=[]] The dependencies. Default is `[]`
+ * @param loggerConfigs Logger configs.
  *
- * @returns The logger status. If `true`, the logger is ready to use. Otherwise `false`, the logger is not ready.
+ * @returns The logger status.
  */
-export const useLogger = function (configs: ConfigureOptions = {}, dependencies: DependencyList = []) {
-  const [status, setStatus] = useState(false);
+export const useLogger = function (loggerConfigs: ConfigureOptions) {
+  const [status, setStatus] = useState(LoggerStatus.NotReady);
 
   const configureLogger = useCallback(async () => {
     try {
-      await FileLogger.configure(configs);
-      console.log(`Log files path: ${await FileLogger.getLogFilePaths()}`);
+      await FileLogger.configure(loggerConfigs);
 
       if (__DEV__) {
         await FileLogger.deleteLogFiles();
       }
 
-      setStatus(true);
+      setStatus(LoggerStatus.Ready);
     } catch (error) {
-      console.error("Couldn't configure the logger.", error);
+      console.error("Couldn't configure logger.", error);
 
-      setStatus(false);
+      setStatus(LoggerStatus.Failed);
     }
-  }, dependencies);
+  }, [loggerConfigs]);
 
   useEffect(() => {
     configureLogger();
-  }, dependencies);
+  }, [configureLogger]);
 
   return status;
 };

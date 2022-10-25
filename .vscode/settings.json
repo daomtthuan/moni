@@ -1,5 +1,8 @@
 {
+  // Spell checking
   "cSpell.words": ["Daomtthuan", "endregion", "moni", "Nativebase", "tsdoc"],
+
+  // Icons
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.opacity": 0.8,
   "material-icon-theme.saturation": 0.9,
@@ -27,6 +30,37 @@
     "_bundle": "packages",
     ".react": "react-components"
   },
+
+  // I18n
   "i18n-ally.localesPaths": ["./src/locales"],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+
+  // Hidden files and folders
+  "files.exclude": {
+    // Source controls
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+
+    // Project configs
+    "_bundle": true,
+    "_node-version": true,
+    "_ruby-version": true,
+    ".buckconfig": true,
+    ".editorconfig": true,
+    ".flowconfig": true,
+    ".gitignore": true,
+    ".prettierrc.js": true,
+    ".vscode": true,
+    ".watchmanconfig": true,
+    "babel.config.js": true,
+    "Gemfile": true,
+    "metro.config.js": true,
+    "package.json": true,
+    "tsconfig.json": true,
+    "yarn.lock": true
+  }
 }

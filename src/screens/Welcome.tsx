@@ -1,17 +1,18 @@
+import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
-import { GuestRouter } from '~routers/Guest';
+import { GuestScreenProps } from '~routers/Guest';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { PEXELS_API_KEY } from '@env';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Navigation props. */
-export type NavigationProps = PropsWithoutRef<{}>;
+/** WelcomeScreen props. */
+export type WelcomeScreenProps = PropsWithoutRef<GuestScreenProps<'Welcome'>>;
 
-/** Navigation component. */
-export type NavigationComponent = FunctionComponent<NavigationProps>;
+/** WelcomeScreen component. */
+export type WelcomeScreenComponent = FunctionComponent<WelcomeScreenProps>;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -22,15 +23,15 @@ export type NavigationComponent = FunctionComponent<NavigationProps>;
 // --------------------------------------------------------------------------------
 
 /**
- * Navigation component.
+ * WelcomeScreen component.
  *
- * @returns The App navigation container component.
+ * @returns The Welcome screen component.
  */
-export const Navigation: NavigationComponent = function () {
+export const WelcomeScreen: WelcomeScreenComponent = function () {
   return (
-    <NavigationContainer>
-      <GuestRouter />
-    </NavigationContainer>
+    <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
+      <Text>{PEXELS_API_KEY}</Text>
+    </VStack>
   );
 };
 

@@ -1,17 +1,14 @@
 import { FunctionComponent, PropsWithoutRef } from 'react';
-import { GuestRouter } from '~routers/Guest';
-
-import { NavigationContainer } from '@react-navigation/native';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Navigation props. */
-export type NavigationProps = PropsWithoutRef<{}>;
+/** LoadingScreen props. */
+export type LoadingScreenProps = PropsWithoutRef<{}>;
 
-/** Navigation component. */
-export type NavigationComponent = FunctionComponent<NavigationProps>;
+/** LoadingScreen component. */
+export type LoadingScreenComponent = FunctionComponent<LoadingScreenProps>;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -22,16 +19,12 @@ export type NavigationComponent = FunctionComponent<NavigationProps>;
 // --------------------------------------------------------------------------------
 
 /**
- * Navigation component.
+ * LoadingScreen component.
  *
- * @returns The App navigation container component.
+ * @returns The Loading screen component.
  */
-export const Navigation: NavigationComponent = function () {
-  return (
-    <NavigationContainer>
-      <GuestRouter />
-    </NavigationContainer>
-  );
+export const LoadingScreen: LoadingScreenComponent = function () {
+  return <></>;
 };
 
 // --------------------------------------------------------------------------------

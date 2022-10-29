@@ -1,14 +1,13 @@
 import { FunctionComponent, PropsWithoutRef, useEffect, useMemo } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-
-import { i18nConfigs } from '../configs/i18n';
-import { loggerConfigs } from '../configs/logger';
-import { defaultThemeMode, themeConfigs, themeVariables } from '../configs/theme';
-import { I18nStatus, useI18n } from '../hooks/i18n';
-import { LoggerStatus, useLogger } from '../hooks/logger';
-import { useThemeConfigurer } from '../hooks/theme';
-import { Navigation } from './Navigation';
-import { ThemeProvider } from './Theme';
+import { i18nConfigs } from '~configs/i18n';
+import { loggerConfigs } from '~configs/logger';
+import { Navigation } from '~containers/Navigation';
+import { ThemeProvider } from '~containers/Theme';
+import { I18nStatus, useI18n } from '~hooks/i18n';
+import { LoggerStatus, useLogger } from '~hooks/logger';
+import { ErrorScreen } from '~screens/Error';
+import { LoadingScreen } from '~screens/Loading';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
@@ -36,7 +35,6 @@ export type AppComponent = FunctionComponent<AppProps>;
 export const App: AppComponent = function () {
   const loggerStatus = useLogger(loggerConfigs);
   const i18nStatus = useI18n(i18nConfigs);
-  const themeConfigurer = useThemeConfigurer(themeConfigs, defaultThemeMode, themeVariables);
 
   const isReady = useMemo(() => {
     if (loggerStatus === LoggerStatus.NotReady) return false;
@@ -58,8 +56,16 @@ export const App: AppComponent = function () {
     }
   }, [isReady]);
 
+  if (!isReady) {
+    return <LoadingScreen />;
+  }
+
+  if (isFailed) {
+    return <ErrorScreen />;
+  }
+
   return (
-    <ThemeProvider configurer={themeConfigurer}>
+    <ThemeProvider>
       <Navigation />
     </ThemeProvider>
   );

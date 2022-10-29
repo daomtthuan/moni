@@ -1,7 +1,6 @@
 import { InitOptions } from 'i18next';
-
-import { LocaleCode } from '../locales/locales';
-import { LocaleResourceNamespace, LocaleResources, localeResources } from '../locales/resources';
+import { LocaleCode } from '~locales/locales';
+import { LocaleResourceNamespace, LocaleResources, localeResources } from '~locales/resources';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces

@@ -1,11 +1,10 @@
 import I18next, { LanguageDetectorAsyncModule } from 'i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { initReactI18next } from 'react-i18next';
+import { I18nAsyncStorageKey } from '~configs/async-storage';
+import { I18nConfigs } from '~configs/i18n';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-
-import { I18nAsyncStorageKey } from '../configs/async-storage';
-import { I18nConfigs } from '../configs/i18n';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces

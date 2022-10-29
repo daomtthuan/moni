@@ -1,7 +1,6 @@
 import { INativebaseConfig, theme } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-
-import { ThemeColorMode, ThemeVariables } from '../hooks/theme';
+import { ThemeColorMode, ThemeVariables } from '~hooks/theme';
 
 // --------------------------------------------------------------------------------
 // #region - Configs

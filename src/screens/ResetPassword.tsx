@@ -1,12 +1,13 @@
 import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
+import { GuestScreenProps } from '~routers/Guest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** ResetPasswordScreen props. */
-export type ResetPasswordScreenProps = PropsWithoutRef<{}>;
+export type ResetPasswordScreenProps = PropsWithoutRef<GuestScreenProps<'ResetPassword'>>;
 
 /** ResetPasswordScreen component. */
 export type ResetPasswordScreenComponent = FunctionComponent<ResetPasswordScreenProps>;

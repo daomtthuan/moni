@@ -1,9 +1,8 @@
 import { ColorMode, extendTheme, INativebaseConfig, StorageManager, Theme } from 'native-base';
 import { useMemo } from 'react';
+import { ThemeAsyncStorageKey } from '~configs/async-storage';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-
-import { ThemeAsyncStorageKey } from '../configs/async-storage';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces

@@ -1,6 +1,6 @@
 {
   // Spell checking
-  "cSpell.words": ["Daomtthuan", "endregion", "moni", "Nativebase", "tsdoc"],
+  "cSpell.words": ["daomtthuan", "endregion", "moni", "nativebase", "pexels", "tsdoc"],
 
   // Icons
   "material-icon-theme.activeIconPack": "react_redux",
@@ -56,10 +56,8 @@
     ".prettierrc.js": true,
     ".vscode": true,
     ".watchmanconfig": true,
-    "babel.config.js": true,
     "Gemfile": true,
     "metro.config.js": true,
-    "package.json": true,
     "tsconfig.json": true,
     "yarn.lock": true
   }

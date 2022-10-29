@@ -1,13 +1,14 @@
 import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { GuestScreenProps } from '~routers/Guest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** SignInScreen props. */
-export type SignInScreenProps = PropsWithoutRef<{}>;
+export type SignInScreenProps = PropsWithoutRef<GuestScreenProps<'SignIn'>>;
 
 /** SignInScreen component. */
 export type SignInScreenComponent = FunctionComponent<SignInScreenProps>;

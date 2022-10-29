@@ -13,7 +13,12 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "strict": true,
-    "types": ["node", "react", "react-native"]
+    "typeRoots": ["./src/types"],
+    "types": ["node", "react", "react-native"],
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["src/*"]
+    }
   },
-  "include": ["./src/**/*", "index.js", "index.js"]
+  "exclude": ["node_modules", "android", "ios", "_bundle"]
 }

@@ -1,6 +1,6 @@
-import type { LocaleCode } from './locales';
-import enCommon from './en/common.json';
-import viCommon from './vi/common.json';
+import type { LocaleCode } from '~locales/locales';
+import enCommon from '~locales/en/common.json';
+import viCommon from '~locales/vi/common.json';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces

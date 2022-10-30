@@ -36,7 +36,7 @@ export const useLogger: LoggerHook = function () {
 
       setStatus(HookStatus.Ready);
     } catch (error) {
-      console.error("Couldn't configure logger.", error);
+      console.error("Couldn't configure logger.", error, JSON.stringify(loggerConfigs, null, 2));
 
       setStatus(HookStatus.Failed);
     }

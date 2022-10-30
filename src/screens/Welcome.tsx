@@ -1,6 +1,6 @@
 import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef, useCallback, useEffect, useState } from 'react';
-import { debug } from '~common/debug';
+import { getDayInYear } from '~common/date';
 import { BackgroundImageBox } from '~components/BackgroundImageBox';
 import { pexelsCollections } from '~configs/pexels';
 import { usePexels } from '~hooks/pexels';
@@ -30,19 +30,31 @@ export type WelcomeScreenComponent = FunctionComponent<WelcomeScreenProps>;
  * @returns The Welcome screen component.
  */
 export const WelcomeScreen: WelcomeScreenComponent = function () {
-  const { getCollection } = usePexels();
+  const { getCollectionById, getPhotoByIndex, isError } = usePexels();
 
   const [imageBackgroundUrl, setImageBackgroundUrl] = useState<string | undefined>();
 
   const getBackgroundImage = useCallback(async () => {
     try {
-      const collection = await getCollection(pexelsCollections.background);
+      const collectionResult = await getCollectionById(pexelsCollections.background);
+      if (isError(collectionResult)) {
+        throw collectionResult.error;
+      }
+      const collection = collectionResult.collection;
 
-      debug.log(collection);
+      // Get image by day in year
+      const photoIndex = getDayInYear() % collection.photos_count;
+      const photoResult = await getPhotoByIndex(collection.id, photoIndex);
+      if (isError(photoResult)) {
+        throw photoResult.error;
+      }
+
+      const photo = photoResult.photo;
+      setImageBackgroundUrl(photo.src.large);
     } catch (error) {
-      console.error("Couldn't get random image from Pexels.", error);
+      console.error("Couldn't get background image from Pexels.", error, JSON.stringify({ collectionId: pexelsCollections.background }, null, 2));
     }
-  }, [getCollection]);
+  }, [getCollectionById]);
 
   useEffect(() => {
     getBackgroundImage();

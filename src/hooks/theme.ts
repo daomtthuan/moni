@@ -66,7 +66,7 @@ export const useTheme: ThemeHook = function () {
         try {
           await modeStorage.setItem(mode as ThemeColorMode);
         } catch (error) {
-          console.error("Couldn't set the theme mode to the async storage.", error);
+          console.error("Couldn't set the theme mode to the async storage.", error, JSON.stringify({ mode }, null, 2));
         }
       },
     };

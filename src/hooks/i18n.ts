@@ -54,7 +54,7 @@ export const useI18n: I18nHook = function () {
         try {
           await languageStorage.setItem(language);
         } catch (error) {
-          console.error("Couldn't set locale to the async storage.", error);
+          console.error("Couldn't set locale to the async storage.", error, JSON.stringify({ language }, null, 2));
         }
       },
     };
@@ -71,7 +71,7 @@ export const useI18n: I18nHook = function () {
 
       setStatus(HookStatus.Ready);
     } catch (error) {
-      console.error("Couldn't configure i18n.", error);
+      console.error("Couldn't configure i18n.", error, JSON.stringify(i18nConfigs, null, 2));
 
       setStatus(HookStatus.Failed);
     }

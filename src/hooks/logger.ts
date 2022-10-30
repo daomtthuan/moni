@@ -1,19 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ConfigureOptions, FileLogger } from 'react-native-file-logger';
+import { FileLogger } from 'react-native-file-logger';
+import { HookStatus } from '~common/status';
+import { loggerConfigs } from '~configs/logger';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Logger status. */
-export enum LoggerStatus {
-  /** Ready. */
-  Ready,
-  /** Ready. */
-  NotReady,
-  /** Failed. */
-  Failed,
-}
+/** Logger hook. */
+export type LoggerHook = () => HookStatus;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -24,14 +19,12 @@ export enum LoggerStatus {
 // --------------------------------------------------------------------------------
 
 /**
- * Create a logger.
+ * Create a Logger.
  *
- * @param loggerConfigs Logger configs.
- *
- * @returns The logger status.
+ * @returns The Logger status.
  */
-export const useLogger = function (loggerConfigs: ConfigureOptions) {
-  const [status, setStatus] = useState(LoggerStatus.NotReady);
+export const useLogger: LoggerHook = function () {
+  const [status, setStatus] = useState(HookStatus.NotReady);
 
   const configureLogger = useCallback(async () => {
     try {
@@ -41,13 +34,13 @@ export const useLogger = function (loggerConfigs: ConfigureOptions) {
         await FileLogger.deleteLogFiles();
       }
 
-      setStatus(LoggerStatus.Ready);
+      setStatus(HookStatus.Ready);
     } catch (error) {
       console.error("Couldn't configure logger.", error);
 
-      setStatus(LoggerStatus.Failed);
+      setStatus(HookStatus.Failed);
     }
-  }, [loggerConfigs]);
+  }, []);
 
   useEffect(() => {
     configureLogger();

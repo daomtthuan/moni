@@ -1,8 +1,9 @@
 import I18next, { LanguageDetectorAsyncModule } from 'i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { initReactI18next } from 'react-i18next';
+import { HookStatus } from '~common/status';
 import { I18nAsyncStorageKey } from '~configs/async-storage';
-import { I18nConfigs } from '~configs/i18n';
+import { i18nConfigs } from '~configs/i18n';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
@@ -10,15 +11,8 @@ import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Logger status. */
-export enum I18nStatus {
-  /** Ready. */
-  Ready,
-  /** Ready. */
-  NotReady,
-  /** Failed. */
-  Failed,
-}
+/** I18n hook. */
+export type I18nHook = () => HookStatus;
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -29,14 +23,12 @@ export enum I18nStatus {
 // --------------------------------------------------------------------------------
 
 /**
- * Create a i18n.
+ * Create a I18n.
  *
- * @param i18nConfigs I18n configs.
- *
- * @returns I18n status.
+ * @returns The I18n status.
  */
-export const useI18n = (i18nConfigs: I18nConfigs) => {
-  const [status, setStatus] = useState(I18nStatus.NotReady);
+export const useI18n: I18nHook = function () {
+  const [status, setStatus] = useState(HookStatus.NotReady);
 
   const languageStorage = useAsyncStorage(I18nAsyncStorageKey.Language);
 
@@ -44,7 +36,9 @@ export const useI18n = (i18nConfigs: I18nConfigs) => {
     return {
       type: 'languageDetector',
       async: true,
+
       init: () => {},
+
       detect: async (setLanguage) => {
         try {
           let language = (await languageStorage.getItem()) ?? i18nConfigs.defaultLanguage;
@@ -64,7 +58,7 @@ export const useI18n = (i18nConfigs: I18nConfigs) => {
         }
       },
     };
-  }, [languageStorage, i18nConfigs.defaultLanguage]);
+  }, [languageStorage]);
 
   const configureI18n = useCallback(async () => {
     try {
@@ -75,13 +69,13 @@ export const useI18n = (i18nConfigs: I18nConfigs) => {
         resources: i18nConfigs.resources,
       });
 
-      setStatus(I18nStatus.Ready);
+      setStatus(HookStatus.Ready);
     } catch (error) {
       console.error("Couldn't configure i18n.", error);
 
-      setStatus(I18nStatus.Failed);
+      setStatus(HookStatus.Failed);
     }
-  }, [languageDetector, i18nConfigs]);
+  }, [languageDetector]);
 
   useEffect(() => {
     configureI18n();

@@ -58,7 +58,6 @@
     ".watchmanconfig": true,
     "Gemfile": true,
     "metro.config.js": true,
-    "tsconfig.json": true,
     "yarn.lock": true
   }
 }

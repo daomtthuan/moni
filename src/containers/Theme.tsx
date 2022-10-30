@@ -1,7 +1,6 @@
 import { NativeBaseProvider } from 'native-base';
 import { FunctionComponent, PropsWithChildren, PropsWithoutRef } from 'react';
-import { defaultThemeMode, themeConfigs, themeVariables } from '~configs/theme';
-import { useThemeConfigurer } from '~hooks/theme';
+import { useTheme } from '~hooks/theme';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
@@ -29,7 +28,7 @@ export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;
  * @returns The Theme provider container component.
  */
 export const ThemeProvider: ThemeProviderComponent = function (props) {
-  const { configs, variables, modeManager } = useThemeConfigurer(themeConfigs, defaultThemeMode, themeVariables);
+  const { configs, variables, modeManager } = useTheme();
 
   return (
     <NativeBaseProvider config={configs} theme={variables} colorModeManager={modeManager} isSSR>

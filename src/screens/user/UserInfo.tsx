@@ -26,7 +26,7 @@ export type UserInfoScreenComponent = FunctionComponent<UserInfoScreenProps>;
  */
 export const UserInfoScreen: UserInfoScreenComponent = function () {
   return (
-    <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
+    <VStack flex={1} alignItems="center" justifyContent="center">
       <Text>User info screen</Text>
     </VStack>
   );

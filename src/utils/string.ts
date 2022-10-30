@@ -5,7 +5,7 @@
  *
  * @returns The text has been removed Vietnamese accents.
  */
-export const removeVietnameseAccents = (text?: string) => {
+export const removeVietnameseAccents = function (text?: string) {
   if (!text) {
     return '';
   }

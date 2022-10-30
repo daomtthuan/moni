@@ -26,7 +26,7 @@ export type ErrorScreenComponent = FunctionComponent<ErrorScreenProps>;
  */
 export const ErrorScreen: ErrorScreenComponent = function () {
   return (
-    <VStack flex={1} alignItems={'center'} justifyContent={'center'}>
+    <VStack flex={1} alignItems="center" justifyContent="center">
       <Text fontSize="lg">Error</Text>
     </VStack>
   );

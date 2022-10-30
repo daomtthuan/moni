@@ -1,6 +1,26 @@
-import { INativebaseConfig, theme } from 'native-base';
+import { ColorMode, INativebaseConfig, theme, Theme } from 'native-base';
+import { ColorType } from 'native-base/lib/typescript/components/types';
 import LinearGradient from 'react-native-linear-gradient';
-import { ThemeColorMode, ThemeVariables } from '~hooks/theme';
+
+// --------------------------------------------------------------------------------
+// #region - Types and Interfaces
+// --------------------------------------------------------------------------------
+
+/** Theme color mode. */
+export type ThemeColorMode = NonNullable<ColorMode>;
+
+/** ThemeProvider variables. */
+export type ThemeVariables = Theme | (Record<string, any> & {});
+
+/** Color config. */
+export type ColorConfig = {
+  light: ColorType;
+  dark: ColorType;
+};
+
+// --------------------------------------------------------------------------------
+// #endregion
+// --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
 // #region - Configs
@@ -18,6 +38,9 @@ export const themeConfigs: INativebaseConfig = {
 
 /** Theme variables. */
 export const themeVariables: ThemeVariables = {
+  config: {
+    initialColorMode: defaultThemeMode,
+  },
   colors: {
     primary: theme.colors.violet,
     danger: theme.colors.rose,
@@ -49,28 +72,18 @@ export const themeVariables: ThemeVariables = {
       900: '#1d1126',
     },
   },
-  config: {
-    initialColorMode: defaultThemeMode,
-  },
+};
 
-  components: {
-    Text: {
-      baseStyle: () => {
-        return {
-          _light: { color: 'dark.900' },
-          _dark: { color: 'light.900' },
-        };
-      },
-    },
-    VStack: {
-      baseStyle: () => {
-        return {
-          _light: { bgColor: 'light.900' },
-          _dark: { bgColor: 'dark.900' },
-        };
-      },
-    },
-  },
+/** Text color. */
+export const textColor: ColorConfig = {
+  light: 'dark.900',
+  dark: 'light.50',
+};
+
+/** Background color. */
+export const backgroundColor: ColorConfig = {
+  light: 'light.50',
+  dark: 'dark.900',
 };
 
 // --------------------------------------------------------------------------------

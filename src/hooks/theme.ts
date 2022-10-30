@@ -1,18 +1,13 @@
-import { ColorMode, extendTheme, INativebaseConfig, StorageManager, Theme } from 'native-base';
+import { extendTheme, INativebaseConfig, StorageManager, Theme } from 'native-base';
 import { useMemo } from 'react';
 import { ThemeAsyncStorageKey } from '~configs/async-storage';
+import { defaultThemeMode, ThemeColorMode, themeConfigs, themeVariables } from '~configs/theme';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
-
-/** Theme color mode. */
-export type ThemeColorMode = NonNullable<ColorMode>;
-
-/** ThemeProvider variables. */
-export type ThemeVariables = Theme | (Record<string, any> & {});
 
 /** Theme configurer. */
 export type ThemeConfigurer = {
@@ -24,6 +19,9 @@ export type ThemeConfigurer = {
   variables: Theme;
 };
 
+/** Theme hook. */
+export type ThemeHook = () => ThemeConfigurer;
+
 // --------------------------------------------------------------------------------
 // #endregion
 // --------------------------------------------------------------------------------
@@ -33,15 +31,11 @@ export type ThemeConfigurer = {
 // --------------------------------------------------------------------------------
 
 /**
- * Create a theme configurer.
+ * Create a Theme configurer.
  *
- * @param themeConfigs Theme configs.
- * @param defaultThemeMode Default theme color mode.
- * @param themeVariables Theme variables.
- *
- * @returns The theme configurer.
+ * @returns The Theme configurer.
  */
-export const useThemeConfigurer = function (themeConfigs: INativebaseConfig, defaultThemeMode: ThemeColorMode, themeVariables: ThemeVariables) {
+export const useTheme: ThemeHook = function () {
   const modeStorage = useAsyncStorage(ThemeAsyncStorageKey.Mode);
 
   const modeManager = useMemo<StorageManager>(() => {
@@ -76,17 +70,13 @@ export const useThemeConfigurer = function (themeConfigs: INativebaseConfig, def
         }
       },
     };
-  }, [modeStorage, defaultThemeMode]);
+  }, [modeStorage]);
 
-  const themeConfigurer = useMemo<ThemeConfigurer>(() => {
-    return {
-      configs: themeConfigs,
-      modeManager: modeManager,
-      variables: extendTheme(themeVariables),
-    };
-  }, [themeConfigs, modeManager, themeVariables]);
-
-  return themeConfigurer;
+  return {
+    configs: themeConfigs,
+    modeManager: modeManager,
+    variables: extendTheme(themeVariables),
+  };
 };
 
 // --------------------------------------------------------------------------------

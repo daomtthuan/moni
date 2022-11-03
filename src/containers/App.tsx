@@ -26,11 +26,7 @@ export type AppComponent = FunctionComponent<AppProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * App component.
- *
- * @returns The App root container component.
- */
+/** App component. */
 export const App: AppComponent = function () {
   const loggerStatus = useLogger();
   const i18nStatus = useI18n();

@@ -20,13 +20,7 @@ export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * ThemeProvider component.
- *
- * @param props Theme provider props.
- *
- * @returns The Theme provider container component.
- */
+/** ThemeProvider component. */
 export const ThemeProvider: ThemeProviderComponent = function (props) {
   const { configs, variables, modeManager } = useTheme();
 

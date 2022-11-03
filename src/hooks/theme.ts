@@ -1,7 +1,7 @@
-import { extendTheme, INativebaseConfig, StorageManager, Theme } from 'native-base';
+import { extendTheme, INativebaseConfig, StorageManager, Theme, useColorModeValue } from 'native-base';
 import { useMemo } from 'react';
 import { ThemeAsyncStorageKey } from '~configs/async-storage';
-import { defaultThemeMode, ThemeColorMode, themeConfigs, themeVariables } from '~configs/theme';
+import { backgroundColor, defaultThemeMode, textColor, ThemeColorMode, themeConfigs, themeVariables } from '~configs/theme';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
@@ -77,6 +77,24 @@ export const useTheme: ThemeHook = function () {
     modeManager: modeManager,
     variables: extendTheme(themeVariables),
   };
+};
+
+/**
+ * Get the background color.
+ *
+ * @returns The background color value.
+ */
+export const useBackgroundColor = function () {
+  return useColorModeValue(backgroundColor.light, backgroundColor.dark);
+};
+
+/**
+ * Get the text color.
+ *
+ * @returns The text color value.
+ */
+export const useTextColor = function () {
+  return useColorModeValue(textColor.light, textColor.dark);
 };
 
 // --------------------------------------------------------------------------------

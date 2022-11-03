@@ -1,4 +1,5 @@
 import { FunctionComponent, PropsWithoutRef, useMemo } from 'react';
+import { Background } from '~components/Background';
 import { ResetPasswordScreen } from '~screens/ResetPassword';
 import { SignInScreen } from '~screens/SignIn';
 import { SignUpScreen } from '~screens/SignUp';
@@ -38,21 +39,23 @@ export type GuestScreenProps<Route extends GuestRouteName> = StackScreenProps<Gu
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * GuestRouter component.
- *
- * @returns The Guest router component.
- */
+/** GuestRouter component. */
 export const GuestRouter: GuestRouterComponent = function () {
   const { Navigator, Screen } = useMemo(createStackNavigator<GuestRouterParamList>, []);
 
   return (
-    <Navigator initialRouteName="Welcome">
-      <Screen name="Welcome" component={WelcomeScreen} />
-      <Screen name="SignIn" component={SignInScreen} />
-      <Screen name="SignUp" component={SignUpScreen} />
-      <Screen name="ResetPassword" component={ResetPasswordScreen} />
-    </Navigator>
+    <Background flex={1} paddingTop={500} overlay>
+      <Navigator
+        initialRouteName="Welcome"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Screen name="Welcome" component={WelcomeScreen} />
+        <Screen name="SignIn" component={SignInScreen} />
+        <Screen name="SignUp" component={SignUpScreen} />
+        <Screen name="ResetPassword" component={ResetPasswordScreen} />
+      </Navigator>
+    </Background>
   );
 };
 

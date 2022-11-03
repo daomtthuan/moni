@@ -18,11 +18,7 @@ export type LoadingScreenComponent = FunctionComponent<LoadingScreenProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * LoadingScreen component.
- *
- * @returns The Loading screen component.
- */
+/** LoadingScreen component. */
 export const LoadingScreen: LoadingScreenComponent = function () {
   return <></>;
 };

@@ -1,38 +1,34 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
-import { useNavigationConfigurer } from '~hooks/navigation';
-import { GuestRouter } from '~routers/Guest';
+import { PartialDeep } from 'type-fest';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { Theme } from '@react-navigation/native';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Navigation props. */
-export type NavigationProps = PropsWithoutRef<{}>;
-
-/** Navigation component. */
-export type NavigationComponent = FunctionComponent<NavigationProps>;
-
-// --------------------------------------------------------------------------------
-// #endregion
-// --------------------------------------------------------------------------------
-
-// --------------------------------------------------------------------------------
-// #region - Component
-// --------------------------------------------------------------------------------
-
-/** Navigation component. */
-export const Navigation: NavigationComponent = function () {
-  const { theme } = useNavigationConfigurer();
-
-  return (
-    <NavigationContainer theme={theme}>
-      <GuestRouter />
-    </NavigationContainer>
-  );
+/** Navigation configs. */
+export type NavigationConfigs = {
+  /** Navigation theme. */
+  theme: PartialDeep<Theme>;
 };
 
 // --------------------------------------------------------------------------------
 // #endregion
+// --------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------
+// #region - Configs
+// --------------------------------------------------------------------------------
+
+/** Navigation configs. */
+export const navigationConfigs: NavigationConfigs = {
+  theme: {
+    colors: {
+      background: 'transparent',
+    },
+  },
+};
+
+// --------------------------------------------------------------------------------
+// #region - Configs
 // --------------------------------------------------------------------------------

@@ -77,12 +77,12 @@ export const themeVariables: ThemeVariables = {
 /** Text color. */
 export const textColor: ColorConfig = {
   light: 'dark.900',
-  dark: 'light.50',
+  dark: 'light.900',
 };
 
 /** Background color. */
 export const backgroundColor: ColorConfig = {
-  light: 'light.50',
+  light: 'light.900',
   dark: 'dark.900',
 };
 

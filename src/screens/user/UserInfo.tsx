@@ -19,11 +19,7 @@ export type UserInfoScreenComponent = FunctionComponent<UserInfoScreenProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * UserInfoScreen component.
- *
- * @returns The User information screen component.
- */
+/** UserInfoScreen component. */
 export const UserInfoScreen: UserInfoScreenComponent = function () {
   return (
     <VStack flex={1} alignItems="center" justifyContent="center">

@@ -1,30 +1,37 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import _ from 'lodash';
+import { useMemo } from 'react';
+import { navigationConfigs } from '~configs/navigation';
+
+import { DefaultTheme, Theme } from '@react-navigation/native';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
-/** Overlay props. */
-export type OverlayProps = PropsWithoutRef<{}>;
+export type NavigationConfigurer = {
+  theme: Theme;
+};
 
-/** Overlay component. */
-export type OverlayComponent = FunctionComponent<OverlayProps>;
+/** Navigation hook. */
+export type NavigationHook = () => NavigationConfigurer;
 
 // --------------------------------------------------------------------------------
 // #endregion
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region - Component
+// #region - Hooks
 // --------------------------------------------------------------------------------
 
 /**
- * Overlay component.
+ * Create a Navigation configurer.
  *
- * @returns The Overlay component.
+ * @returns The Navigation configurer.
  */
-export const Overlay: OverlayComponent = function () {
-  return <></>;
+export const useNavigationConfigurer: NavigationHook = function () {
+  const theme = useMemo(() => _.merge(DefaultTheme, navigationConfigs.theme), []);
+
+  return { theme };
 };
 
 // --------------------------------------------------------------------------------

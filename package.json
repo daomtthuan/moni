@@ -6,6 +6,7 @@
   "author": "Daomtthuan <dao.mt.thuan@gmail.com> (https://github.com/daomtthuan)",
   "main": "./src/main.js",
   "scripts": {
+    "emulator": "node ./commands/emulator.js",
     "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
@@ -29,7 +30,8 @@
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.0",
     "react-native-splash-screen": "^3.3.0",
-    "react-native-svg": "^13.3.0"
+    "react-native-svg": "^13.3.0",
+    "type-fest": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

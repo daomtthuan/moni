@@ -20,11 +20,7 @@ export type SignUpScreenComponent = FunctionComponent<SignUpScreenProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * SignUpScreen component.
- *
- * @returns The Sign up screen component.
- */
+/** SignUpScreen component. */
 export const SignUpScreen: SignUpScreenComponent = function () {
   return (
     <VStack flex={1} alignItems="center" justifyContent="center">

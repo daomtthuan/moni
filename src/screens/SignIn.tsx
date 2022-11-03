@@ -21,11 +21,7 @@ export type SignInScreenComponent = FunctionComponent<SignInScreenProps>;
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * SignInScreen component.
- *
- * @returns The Sign in screen component.
- */
+/** SignInScreen component. */
 export const SignInScreen: SignInScreenComponent = function () {
   const { t } = useTranslation();
 

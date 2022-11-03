@@ -20,11 +20,7 @@ export type ResetPasswordScreenComponent = FunctionComponent<ResetPasswordScreen
 // #region - Component
 // --------------------------------------------------------------------------------
 
-/**
- * ResetPasswordScreen component.
- *
- * @returns The Reset password screen component.
- */
+/** ResetPasswordScreen component. */
 export const ResetPasswordScreen: ResetPasswordScreenComponent = function () {
   return (
     <VStack flex={1} alignItems="center" justifyContent="center">

@@ -1,6 +1,7 @@
 import { ColorMode, INativebaseConfig, theme, Theme } from 'native-base';
 import { ColorType } from 'native-base/lib/typescript/components/types';
 import LinearGradient from 'react-native-linear-gradient';
+import { PartialDeep } from 'type-fest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
@@ -10,13 +11,33 @@ import LinearGradient from 'react-native-linear-gradient';
 export type ThemeColorMode = NonNullable<ColorMode>;
 
 /** ThemeProvider variables. */
-export type ThemeVariables = Theme | (Record<string, any> & {});
+export type ThemeVariables = PartialDeep<Theme> | Record<string, unknown>;
 
 /** Color config. */
 export type ColorConfig = {
   light: ColorType;
   dark: ColorType;
 };
+
+/** Theme mode color configs. */
+export type ThemeModeColorConfigs = {
+  [key: string]: ColorConfig;
+};
+
+/** Color mode type. */
+export enum ColorModeType {
+  primary,
+  secondary,
+  success,
+  warning,
+  danger,
+  info,
+  light,
+  dark,
+  muted,
+  white,
+  default,
+}
 
 // --------------------------------------------------------------------------------
 // #endregion
@@ -41,6 +62,7 @@ export const themeVariables: ThemeVariables = {
   config: {
     initialColorMode: defaultThemeMode,
   },
+
   colors: {
     primary: theme.colors.violet,
     danger: theme.colors.rose,
@@ -72,18 +94,84 @@ export const themeVariables: ThemeVariables = {
       900: '#1d1126',
     },
   },
+
+  fontConfig: {
+    Nunito: {
+      100: {
+        normal: 'Nunito-ExtraLight',
+        italic: 'Nunito-ExtraLightItalic',
+      },
+      200: {
+        normal: 'Nunito-Light',
+        italic: 'Nunito-LightItalic',
+      },
+      300: {
+        normal: 'Nunito-Light',
+        italic: 'Nunito-LightItalic',
+      },
+      400: {
+        normal: 'Nunito-Regular',
+        italic: 'Nunito-Italic',
+      },
+      500: {
+        normal: 'Nunito-Medium',
+        italic: 'Nunito-MediumItalic',
+      },
+      600: {
+        normal: 'Nunito-SemiBold',
+        italic: 'Nunito-SemiBoldItalic',
+      },
+      700: {
+        normal: 'Nunito-Bold',
+        italic: 'Nunito-BoldItalic',
+      },
+      800: {
+        normal: 'Nunito-ExtraBold',
+        italic: 'Nunito-ExtraBoldItalic',
+      },
+      900: {
+        normal: 'Nunito-Black',
+        italic: 'Nunito-BlackItalic',
+      },
+    },
+  },
+  fonts: {
+    heading: 'Nunito',
+    body: 'Nunito',
+  },
 };
 
-/** Text color. */
-export const textColor: ColorConfig = {
-  light: 'dark.900',
-  dark: 'light.900',
+/**
+ * Get text color config.
+ *
+ * @param type The color mode type.
+ *
+ * @returns The text color config.
+ */
+export const getTextColorConfig = function (type: ColorModeType = ColorModeType.default): ColorConfig {
+  switch (type) {
+    case ColorModeType.default:
+    default:
+      return { light: 'dark.900', dark: 'light.900' };
+  }
 };
 
-/** Background color. */
-export const backgroundColor: ColorConfig = {
-  light: 'light.900',
-  dark: 'dark.900',
+/**
+ * Get background color config.
+ *
+ * @param type The color mode type.
+ *
+ * @returns The background color config.
+ */
+export const getBackgroundColorConfig = function (type: ColorModeType = ColorModeType.default): ColorConfig {
+  switch (type) {
+    case ColorModeType.primary:
+      return { light: 'primary.400', dark: 'primary.600' };
+
+    case ColorModeType.default:
+    default:
+      return { light: 'light.900', dark: 'dark.900' };
+  }
 };
 
 // --------------------------------------------------------------------------------

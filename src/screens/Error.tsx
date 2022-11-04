@@ -1,12 +1,13 @@
 import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
+import { EmptyObject } from 'type-fest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** ErrorScreen props. */
-export type ErrorScreenProps = PropsWithoutRef<{}>;
+export type ErrorScreenProps = PropsWithoutRef<EmptyObject>;
 
 /** ErrorScreen component. */
 export type ErrorScreenComponent = FunctionComponent<ErrorScreenProps>;

@@ -1,12 +1,13 @@
 import { Text, VStack } from 'native-base';
 import { FunctionComponent, PropsWithoutRef } from 'react';
+import { EmptyObject } from 'type-fest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** UserInfoScreen props. */
-export type UserInfoScreenProps = PropsWithoutRef<{}>;
+export type UserInfoScreenProps = PropsWithoutRef<EmptyObject>;
 
 /** UserInfoScreen component. */
 export type UserInfoScreenComponent = FunctionComponent<UserInfoScreenProps>;

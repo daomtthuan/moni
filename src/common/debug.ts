@@ -5,7 +5,7 @@ export const debug = {
    *
    * @param obj Object to log.
    */
-  log: (obj?: any) => {
+  log: (obj?: unknown) => {
     switch (typeof obj) {
       case 'object':
         console.log(JSON.stringify(obj, null, 2));

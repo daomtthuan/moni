@@ -1,11 +1,12 @@
 import { FunctionComponent, PropsWithoutRef } from 'react';
+import { EmptyObject } from 'type-fest';
 
 // --------------------------------------------------------------------------------
 // #region - Types and Interfaces
 // --------------------------------------------------------------------------------
 
 /** LoadingScreen props. */
-export type LoadingScreenProps = PropsWithoutRef<{}>;
+export type LoadingScreenProps = PropsWithoutRef<EmptyObject>;
 
 /** LoadingScreen component. */
 export type LoadingScreenComponent = FunctionComponent<LoadingScreenProps>;

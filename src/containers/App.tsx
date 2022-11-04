@@ -1,5 +1,6 @@
 import { FunctionComponent, PropsWithoutRef, useEffect, useMemo } from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import { EmptyObject } from 'type-fest';
 import { hookStatusChecker } from '~common/status';
 import { Navigation } from '~containers/Navigation';
 import { ThemeProvider } from '~containers/Theme';
@@ -13,7 +14,7 @@ import { LoadingScreen } from '~screens/Loading';
 // --------------------------------------------------------------------------------
 
 /** App props. */
-export type AppProps = PropsWithoutRef<{}>;
+export type AppProps = PropsWithoutRef<EmptyObject>;
 
 /** App component. */
 export type AppComponent = FunctionComponent<AppProps>;

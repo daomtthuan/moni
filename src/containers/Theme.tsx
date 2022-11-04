@@ -1,5 +1,6 @@
 import { NativeBaseProvider } from 'native-base';
 import { FunctionComponent, PropsWithChildren, PropsWithoutRef } from 'react';
+import { EmptyObject } from 'type-fest';
 import { useTheme } from '~hooks/theme';
 
 // --------------------------------------------------------------------------------
@@ -7,7 +8,7 @@ import { useTheme } from '~hooks/theme';
 // --------------------------------------------------------------------------------
 
 /** ThemeProvider props. */
-export type ThemeProviderProps = PropsWithoutRef<PropsWithChildren<{}>>;
+export type ThemeProviderProps = PropsWithoutRef<PropsWithChildren<EmptyObject>>;
 
 /** ThemeProvider component. */
 export type ThemeProviderComponent = FunctionComponent<ThemeProviderProps>;

@@ -37,15 +37,17 @@ export const useI18n: I18nHook = function () {
       type: 'languageDetector',
       async: true,
 
-      init: () => {},
+      init: () => {
+        // do nothing.
+      },
 
       detect: async (setLanguage) => {
         try {
-          let language = (await languageStorage.getItem()) ?? i18nConfigs.defaultLanguage;
+          const language = (await languageStorage.getItem()) ?? i18nConfigs.defaultLanguage;
 
           setLanguage(language);
         } catch (error) {
-          console.error("Couldn't get locale from the async storage.", error);
+          console.error('Could NOT get locale from the async storage.', error);
 
           setLanguage(i18nConfigs.defaultLanguage);
         }
@@ -54,7 +56,7 @@ export const useI18n: I18nHook = function () {
         try {
           await languageStorage.setItem(language);
         } catch (error) {
-          console.error("Couldn't set locale to the async storage.", error, JSON.stringify({ language }, null, 2));
+          console.error('Could NOT set locale to the async storage.', error);
         }
       },
     };
@@ -71,7 +73,7 @@ export const useI18n: I18nHook = function () {
 
       setStatus(HookStatus.Ready);
     } catch (error) {
-      console.error("Couldn't configure i18n.", error, JSON.stringify(i18nConfigs, null, 2));
+      console.error('Could NOT configure i18n.', error);
 
       setStatus(HookStatus.Failed);
     }

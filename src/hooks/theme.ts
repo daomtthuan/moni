@@ -1,7 +1,7 @@
 import { extendTheme, INativebaseConfig, StorageManager, Theme, useColorModeValue } from 'native-base';
 import { useMemo } from 'react';
 import { ThemeAsyncStorageKey } from '~configs/async-storage';
-import { backgroundColor, defaultThemeMode, textColor, ThemeColorMode, themeConfigs, themeVariables } from '~configs/theme';
+import { ColorModeType, defaultThemeMode, getBackgroundColorConfig, getTextColorConfig, ThemeColorMode, themeConfigs, themeVariables } from '~configs/theme';
 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
@@ -27,7 +27,7 @@ export type ThemeHook = () => ThemeConfigurer;
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
-// #region - Hooks
+// #region - Theme hooks
 // --------------------------------------------------------------------------------
 
 /**
@@ -47,11 +47,11 @@ export const useTheme: ThemeHook = function () {
        */
       get: async () => {
         try {
-          let mode = (await modeStorage.getItem()) ?? defaultThemeMode;
+          const mode = (await modeStorage.getItem()) ?? defaultThemeMode;
 
           return mode as ThemeColorMode;
         } catch (error) {
-          console.error("Couldn't get the theme mode from the async storage.", error);
+          console.error('Could NOT get the theme mode from the async storage.', error);
 
           return defaultThemeMode;
         }
@@ -66,7 +66,7 @@ export const useTheme: ThemeHook = function () {
         try {
           await modeStorage.setItem(mode as ThemeColorMode);
         } catch (error) {
-          console.error("Couldn't set the theme mode to the async storage.", error, JSON.stringify({ mode }, null, 2));
+          console.error('Could NOT set the theme mode to the async storage.', error);
         }
       },
     };
@@ -80,21 +80,29 @@ export const useTheme: ThemeHook = function () {
 };
 
 /**
- * Get the background color.
- *
- * @returns The background color value.
- */
-export const useBackgroundColor = function () {
-  return useColorModeValue(backgroundColor.light, backgroundColor.dark);
-};
-
-/**
  * Get the text color.
+ *
+ * @param type The color mode type.
  *
  * @returns The text color value.
  */
-export const useTextColor = function () {
-  return useColorModeValue(textColor.light, textColor.dark);
+export const useTextColor = function (type: ColorModeType = ColorModeType.default) {
+  const { light, dark } = getTextColorConfig(type);
+
+  return useColorModeValue(light, dark);
+};
+
+/**
+ * Get the background color.
+ *
+ * @param type The color mode type.
+ *
+ * @returns The background color value.
+ */
+export const useBackgroundColor = function (type: ColorModeType = ColorModeType.default) {
+  const { light, dark } = getBackgroundColorConfig(type);
+
+  return useColorModeValue(light, dark);
 };
 
 // --------------------------------------------------------------------------------
